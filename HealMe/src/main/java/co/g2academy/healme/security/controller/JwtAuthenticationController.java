@@ -2,12 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package co.g2academy.tokomurah.security.controller;
+package co.g2academy.healme.security.controller;
 
-import co.g2academy.tokomurah.security.model.JwtRequest;
-import co.g2academy.tokomurah.security.model.JwtResponse;
-import co.g2academy.tokomurah.security.service.JwtUserDetailService;
-import co.g2academy.tokomurah.security.util.JwtTokenUtil;
+import co.g2academy.healme.security.model.JwtRequest;
+import co.g2academy.healme.security.model.JwtResponse;
+import co.g2academy.healme.security.service.JwtUserDetailService;
+import co.g2academy.healme.security.util.JwtTokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -16,7 +16,6 @@ import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;

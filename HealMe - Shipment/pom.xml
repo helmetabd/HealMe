@@ -11,7 +11,7 @@
     <groupId>co2.g2academy</groupId>
     <artifactId>tokomurah-orderfullfilment</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>TokoMurah-OrderFullfilment</name>
+    <name>HealMe.id - Shipment</name>
     <description>Demo project for Spring Boot</description>
     <properties>
         <java.version>17</java.version>

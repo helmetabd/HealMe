@@ -2,10 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package co.g2academy.tokomurah.security.filter;
+package co.g2academy.healme.security.filter;
 
-import co.g2academy.tokomurah.security.service.JwtUserDetailService;
-import co.g2academy.tokomurah.security.util.JwtTokenUtil;
+import co.g2academy.healme.security.service.JwtUserDetailService;
+import co.g2academy.healme.security.util.JwtTokenUtil;
 import java.io.IOException;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
