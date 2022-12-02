@@ -19,19 +19,15 @@ import javax.persistence.Table;
  * @author personal
  */
 @Entity
-@Table(name = "t_medicine")
-public class Medicine {
+@Table(name = "t_hospital")
+public class Hospital {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @Column(length = 100, nullable = false)
     private String name;
     @Column(length = 255, nullable = false)
-    private String description;
-    @Column(nullable = false)
-    private Integer price;
-    @Column(nullable = false)
-    private Integer stock;
+    private String address;
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     @JsonIgnore
@@ -44,6 +40,8 @@ public class Medicine {
     public void setUser(User user) {
         this.user = user;
     }
+    
+    
 
     public Integer getId() {
         return id;
@@ -61,28 +59,12 @@ public class Medicine {
         this.name = name;
     }
 
-    public String getDescription() {
-        return description;
+    public String getAddress() {
+        return address;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Integer getPrice() {
-        return price;
-    }
-
-    public void setPrice(Integer price) {
-        this.price = price;
-    }
-
-    public Integer getStock() {
-        return stock;
-    }
-
-    public void setStock(Integer stock) {
-        this.stock = stock;
+    public void setAddress(String address) {
+        this.address = address;
     }
     
     

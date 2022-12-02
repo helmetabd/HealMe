@@ -5,6 +5,7 @@
 package co.g2academy.healme.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -25,9 +26,9 @@ public class Diagnose {
     private Integer id;
     
     @ManyToOne
-    @JoinColumn(name = "diagnose_id", nullable = false)
+    @JoinColumn(name = "consultation_id", nullable = false)
     @JsonIgnore
-    private Diagnose diagnose;
+    private Consultation consultation;
     
     @ManyToOne
     @JoinColumn(name = "patient_id", nullable = false)
@@ -38,4 +39,47 @@ public class Diagnose {
     @JoinColumn(name = "doctor_id", nullable = false)
     @JsonIgnore
     private Doctor doctor;
+    
+    @Column(length = 255, nullable = false)
+    private String description;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Consultation getConsultation() {
+        return consultation;
+    }
+
+    public void setConsultation(Consultation consultation) {
+        this.consultation = consultation;
+    }
+
+    public Patient getPatient() {
+        return patient;
+    }
+
+    public void setPatient(Patient patient) {
+        this.patient = patient;
+    }
+
+    public Doctor getDoctor() {
+        return doctor;
+    }
+
+    public void setDoctor(Doctor doctor) {
+        this.doctor = doctor;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 }

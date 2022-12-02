@@ -2,10 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package co.g2academy.tokomurah.security.configuration;
+package co.g2academy.healme.security.configuration;
 
-import co.g2academy.tokomurah.security.filter.JwtRequestFilter;
-import co.g2academy.tokomurah.security.service.JwtUserDetailService;
+import co.g2academy.healme.security.filter.JwtRequestFilter;
+import co.g2academy.healme.security.service.JwtUserDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -42,8 +42,8 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter{
     @Override
     protected void configure(HttpSecurity http) throws Exception{
         http.csrf().disable().authorizeHttpRequests().antMatchers("/api/authenticate").permitAll()
-                .antMatchers("/api/product").permitAll()
-                .antMatchers("/api/product/**").permitAll()
+                .antMatchers("/api/medicine").permitAll()
+                .antMatchers("/api/medicine/**").permitAll()
                 .antMatchers("/api/register").permitAll()
                 .anyRequest().authenticated()
                 .and()

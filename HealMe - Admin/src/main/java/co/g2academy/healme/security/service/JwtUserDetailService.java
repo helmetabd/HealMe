@@ -2,11 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package co.g2academy.tokomurah.security.service;
+package co.g2academy.healme.security.service;
 
-import co.g2academy.tokomurah.model.User;
-import co.g2academy.tokomurah.repository.UserRepository;
-import com.sun.source.tree.NewArrayTree;
+import co.g2academy.healme.model.User;
+import co.g2academy.healme.repository.UserRepository;
 import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

@@ -5,6 +5,7 @@
 package co.g2academy.healme.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -25,8 +26,8 @@ import javax.persistence.TemporalType;
  * @author personal
  */
 @Entity
-@Table(name = "t_prescription")
-public class Prescription {
+@Table(name = "t_prescription_order")
+public class PrescriptionOrder implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -45,12 +46,15 @@ public class Prescription {
     @JsonIgnore
     private Doctor doctor;
     
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "prescription")
-    private List<PrescriptionDetail> items;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "order")
+    private List<PrescriptionOrderDetail> orderItems;
     
     @Column(nullable = true)
     @Temporal(TemporalType.TIMESTAMP)
     private Date prescriptionDate;
+    
+    @Column(nullable = false)
+    private Integer totalPrice;
 
     public Integer getId() {
         return id;
@@ -76,12 +80,12 @@ public class Prescription {
         this.doctor = doctor;
     }
 
-    public List<PrescriptionDetail> getItems() {
-        return items;
+    public List<PrescriptionOrderDetail> getOrderItems() {
+        return orderItems;
     }
 
-    public void setItems(List<PrescriptionDetail> items) {
-        this.items = items;
+    public void setOrderItems(List<PrescriptionOrderDetail> orderItems) {
+        this.orderItems = orderItems;
     }
 
     public Date getPrescriptionDate() {
@@ -90,6 +94,14 @@ public class Prescription {
 
     public void setPrescriptionDate(Date prescriptionDate) {
         this.prescriptionDate = prescriptionDate;
+    }
+
+    public Integer getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(Integer totalPrice) {
+        this.totalPrice = totalPrice;
     }
 
     public Diagnose getDiagnose() {

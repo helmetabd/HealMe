@@ -2,16 +2,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
-package co.g2academy.healme.repository;
+package co2.g2academy.healmeorderfullfilment.repository;
 
-import co.g2academy.healme.model.Patient;
+import co2.g2academy.healmeorderfullfilment.model.ShipmentsOrder;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
  *
  * @author personal
  */
-public interface PatientRepository extends JpaRepository<Patient, Integer>{
+public interface ShipmentsOrderRepository extends JpaRepository<ShipmentsOrder, Integer>{
     
-    public Patient findPatientByUsername(String Username);
 }

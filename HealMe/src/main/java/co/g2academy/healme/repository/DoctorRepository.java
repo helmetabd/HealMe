@@ -5,6 +5,7 @@
 package co.g2academy.healme.repository;
 
 import co.g2academy.healme.model.Doctor;
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
@@ -13,5 +14,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 public interface DoctorRepository extends JpaRepository<Doctor, Integer>{
     
-    public Doctor findUserByUsername(String Username);
+    public Doctor findDoctorByUsername(String Username);
+    public List<Doctor> findBySpecialist(String specialist);
+    
+    
 }

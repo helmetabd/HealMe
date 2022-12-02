@@ -4,14 +4,13 @@
  */
 package co.g2academy.healme.repository;
 
-import co.g2academy.healme.model.Patient;
+import co.g2academy.healme.model.ShipmentsOrder;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
  *
  * @author personal
  */
-public interface PatientRepository extends JpaRepository<Patient, Integer>{
+public interface ShipmentOrderRepository extends JpaRepository<ShipmentsOrder, Integer>{
     
-    public Patient findPatientByUsername(String Username);
 }
