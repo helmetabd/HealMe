@@ -42,7 +42,11 @@ public class MedicineController {
 
     @GetMapping("/medicine/{id}")
     public Medicine getMedicineById(@PathVariable Integer id) {
-        return medicineRepsitory.findById(id).get();
+        Optional<Medicine> opt =  medicineRepsitory.findById(id);
+        if(opt.isPresent()){
+            return opt.get();
+        }
+        return null;
     }
 
     @PostMapping("/save/medicine")

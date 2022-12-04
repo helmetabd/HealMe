@@ -4,6 +4,7 @@
  */
 package co.g2academy.healme.repository;
 
+import co.g2academy.healme.model.Prescription;
 import co.g2academy.healme.model.Shipments;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -12,5 +13,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @author personal
  */
 public interface ShipmentRepository extends JpaRepository<Shipments, Integer>{
-    
+    public Shipments getShipmentByPrescriptionAndStatus(Prescription prescription, String status);
 }
