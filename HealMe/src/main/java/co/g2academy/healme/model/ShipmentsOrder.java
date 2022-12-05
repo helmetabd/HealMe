@@ -31,7 +31,7 @@ public class ShipmentsOrder {
     @ManyToOne
     @JoinColumn(name = "prescription_order_id", nullable = false)
     @JsonIgnore
-    private PrescriptionOrder prescriptionOrder;
+    private Order prescriptionOrder;
     
     @Column(nullable = true)
     @Temporal(TemporalType.TIMESTAMP)
@@ -51,11 +51,11 @@ public class ShipmentsOrder {
         this.id = id;
     }
 
-    public PrescriptionOrder getPrescriptionOrder() {
+    public Order getPrescriptionOrder() {
         return prescriptionOrder;
     }
 
-    public void setPrescriptionOrder(PrescriptionOrder prescriptionOrder) {
+    public void setPrescriptionOrder(Order prescriptionOrder) {
         this.prescriptionOrder = prescriptionOrder;
     }
 

@@ -5,8 +5,6 @@
 package co.g2academy.healme.repository;
 
 import co.g2academy.healme.model.Medicine;
-import java.util.Optional;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
@@ -15,7 +13,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 public interface MedicineRepository extends JpaRepository<Medicine, Integer>{
     
-    @Override
-    @Cacheable(value = "MedicineById", key = "#id")
-    public Optional<Medicine> findById(Integer id);
+    public Medicine findMedicineByName(String name);
 }

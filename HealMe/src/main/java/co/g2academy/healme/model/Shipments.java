@@ -29,9 +29,9 @@ public class Shipments {
     private Integer id;
     
     @ManyToOne
-    @JoinColumn(name = "prescription_id", nullable = false)
+    @JoinColumn(name = "Medicine_cart_id", nullable = false)
     @JsonIgnore
-    private Prescription prescription;
+    private MedicineCart medicineCart;
     
     @Column(nullable = true)
     @Temporal(TemporalType.TIMESTAMP)
@@ -51,12 +51,12 @@ public class Shipments {
         this.id = id;
     }
 
-    public Prescription getPrescription() {
-        return prescription;
+    public MedicineCart getMedicineCart() {
+        return medicineCart;
     }
 
-    public void setPrescription(Prescription prescription) {
-        this.prescription = prescription;
+    public void setMedicineCart(MedicineCart medicineCart) {
+        this.medicineCart = medicineCart;
     }
 
     public Date getShipmentsDate() {

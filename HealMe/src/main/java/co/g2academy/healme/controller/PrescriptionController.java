@@ -4,7 +4,6 @@
  */
 package co.g2academy.healme.controller;
 
-import co.g2academy.healme.model.Consultation;
 import co.g2academy.healme.model.Diagnose;
 import co.g2academy.healme.model.Patient;
 import co.g2academy.healme.model.Prescription;
@@ -15,7 +14,6 @@ import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -42,7 +40,7 @@ public class PrescriptionController {
         Patient loggedInPatient = patientRepository.findPatientByUsername(principal.getName());
         List<Diagnose> diagnose = diagnoseRepository.findDiagnoseByPatient(loggedInPatient);
         if(diagnose == null){
-            return ResponseEntity.badRequest().body("You dont have any consultation yet");
+            return ResponseEntity.badRequest().body("You dont have any diagnose yet");
         }
         List<Prescription> prescriptions = prescriptionRepository.findPrescriptionByPatient(loggedInPatient);
         return ResponseEntity.ok(prescriptions);
@@ -52,7 +50,7 @@ public class PrescriptionController {
         Patient loggedInPatient = patientRepository.findPatientByUsername(principal.getName());
         List<Diagnose> diagnose = diagnoseRepository.findDiagnoseByPatient(loggedInPatient);
         if(diagnose == null){
-            return ResponseEntity.badRequest().body("You dont have any consultation yet");
+            return ResponseEntity.badRequest().body("You dont have any diagnose yet");
         }
         Optional<Prescription> prescriptionOpt = prescriptionRepository.findById(id);
         if (prescriptionOpt.isEmpty()) {

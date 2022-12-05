@@ -1,0 +1,21 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
+ */
+package co.g2academy.healme_doctor.repository;
+
+import co.g2academy.healme_doctor.model.Doctor;
+import java.util.List;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+/**
+ *
+ * @author personal
+ */
+public interface DoctorRepository extends JpaRepository<Doctor, Integer>{
+    
+    public Doctor findDoctorByUsername(String Username);
+    public List<Doctor> findBySpecialist(String specialist);
+    
+    
+}

@@ -4,6 +4,7 @@
  */
 package co.g2academy.healme.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -26,8 +27,10 @@ public class Patient {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @Column(length = 100, nullable = false)
+    @JsonIgnore
     private String username;
     @Column(length = 100, nullable = false)
+    @JsonIgnore
     private String password;
     @Column(length = 100, nullable = false)
     private String name;
