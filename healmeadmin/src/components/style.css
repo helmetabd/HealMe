@@ -1,0 +1,81 @@
+.InputBox{
+    width: 300px;
+  }
+  .InputBox input{
+    background-color: white;
+    border: none; 
+  }
+  
+  .InputBox input:focus{
+    outline: 3px solid crimson;
+}
+
+#card{
+  background-color: #FFF0E5;
+  box-shadow: 5px 5px 0 black;
+  border-radius: 20px;
+  opacity: 1;
+  border: 3px solid black;
+  width: 400px;
+}
+
+#form{
+  background-color: #FFF0E5;
+  margin: 20px;
+  padding: 15px;
+  box-shadow: 5px 5px 0 black;
+  border-radius: 20px;
+  opacity: 1;
+  width: 400px;
+  height: fit-content;
+  border: 3px solid black;
+}
+
+#book-list{
+  background-color: #FFF0E5;
+  box-shadow: 5px 5px 0 black;
+  border-radius: 20px;
+  opacity: 1;
+  border: 3px solid black;
+  width: 500px;
+}
+
+button{
+  background-color: paleturquoise;
+  padding: 10px 40px;
+  margin: 20px;
+  color: black;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+.buttonLink{
+  display: block;
+  background-color: paleturquoise;
+  padding: 10px 40px;
+  margin: 20px;
+  color: black;
+  cursor: pointer;
+  border-radius: 10px;
+  text-decoration: none;
+  border: 1px solid black;
+}
+
+.insert{
+  background-color: #FFF0E5;
+  box-shadow: 5px 5px 0 black;
+  border-radius: 20px;
+  opacity: 1;
+  border: 3px solid black;
+  /* width: 500px; */
+}
+
+.navigate{
+  background-color: #FFF0E5;
+  box-shadow: 5px 5px 0 black;
+  border-radius: 20px;
+  opacity: 1;
+  border: 3px solid black;
+  margin: 10px 10px 20px;
+  /* width: 500px; */
+}

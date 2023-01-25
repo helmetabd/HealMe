@@ -17,4 +17,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface ConsultationRepository extends JpaRepository<Consultation, Integer>{
     public List<Consultation> findConsultationByDoctor(Doctor doctor);
     public Consultation findConsultationByPatient(Patient patient);
+    public Consultation findConsultationByIdAndDoctor(Integer id, Doctor doctor);
 }

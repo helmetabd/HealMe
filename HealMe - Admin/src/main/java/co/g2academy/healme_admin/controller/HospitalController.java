@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,41 +29,54 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/api")
+@CrossOrigin(origins = "http://localhost:3000")
 public class HospitalController {
 
     @Autowired
-    private HospitalRepository hospitalRepsitory;
+    private HospitalRepository hospitalRepository;
     @Autowired
     private UserRepository userRepository;
 
     @GetMapping("/hospital")
     public List<Hospital> getHospitals() {
-        return hospitalRepsitory.findAll();
+        return hospitalRepository.findAll();
     }
 
     @GetMapping("/hospital/{id}")
-    public Hospital getHospitalById(@PathVariable Integer id) {
-        return hospitalRepsitory.findById(id).get();
+    public ResponseEntity getHospitalById(@PathVariable Integer id) {
+        Optional<Hospital> opt =  hospitalRepository.findById(id);
+        if(opt.isEmpty()){
+            return ResponseEntity.badRequest().body("Student Not Found");
+        }
+        return ResponseEntity.ok(opt.get());
     }
 
     @PostMapping("/save/hospital")
-    public String save(@RequestBody Hospital hospital, Principal principal) {
+    public ResponseEntity save(@RequestBody Hospital hospital, Principal principal) {
         User loggedInUser = userRepository.findUserByUsername(principal.getName());
         hospital.setUser(loggedInUser);
-        hospitalRepsitory.save(hospital);
-        return "success";
+        Hospital hospitalFromDb = hospitalRepository.findHospitalByName(hospital.getName());
+        Hospital newHospital = null;
+        if (hospitalFromDb == null) {
+            newHospital = hospitalRepository.save(hospital);
+        } else {
+            return ResponseEntity.badRequest().body("Hospital already exist");
+        }
+        return ResponseEntity.ok().body(newHospital);
     }
 
     @PutMapping("/update/hospital/{id}")
     public ResponseEntity update(@RequestBody Hospital hospital, Principal principal) {
-        Optional<Hospital> opt = hospitalRepsitory.findById(hospital.getId());
+        Optional<Hospital> opt = hospitalRepository.findById(hospital.getId());
         if (!opt.isEmpty()) {
             Hospital hFromDb = opt.get();
             if (hFromDb.getUser().getUsername().equals(principal.getName())) {
                 hFromDb.setName(hospital.getName());
                 hFromDb.setAddress(hospital.getAddress());
-                hospitalRepsitory.save(hFromDb);
-                return ResponseEntity.ok("success");
+                hFromDb.setDescription(hospital.getDescription());
+                hFromDb.setImage(hospital.getImage());
+                Hospital updatedHospital = hospitalRepository.save(hFromDb);
+                return ResponseEntity.ok(updatedHospital);
             }
         }
         return ResponseEntity.badRequest().body("Hospital not found");
@@ -70,11 +84,11 @@ public class HospitalController {
 
     @DeleteMapping("/hospital/{id}")
     public ResponseEntity deleteById(@PathVariable Integer id, Principal principal) {
-        Optional<Hospital> opt = hospitalRepsitory.findById(id);
+        Optional<Hospital> opt = hospitalRepository.findById(id);
         if (!opt.isEmpty()) {
             Hospital hFromDb = opt.get();
             if (hFromDb.getUser().getUsername().equals(principal.getName())) {
-                hospitalRepsitory.deleteById(id);
+                hospitalRepository.deleteById(id);
                 return ResponseEntity.ok("success");
             }
         }

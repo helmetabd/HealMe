@@ -8,12 +8,15 @@ import co.g2academy.healme.model.Patient;
 import co.g2academy.healme.model.Prescription;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author personal
  */
+@Repository
 public interface PrescriptionRepository extends JpaRepository<Prescription, Integer>{
     public List<Prescription> findPrescriptionByPatient(Patient patient);
     public Prescription getPrescriptionByPatient(Patient patient);
+    
 }

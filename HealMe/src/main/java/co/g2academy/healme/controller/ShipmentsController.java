@@ -60,7 +60,7 @@ public class ShipmentsController {
         }
         Medicine m = opt.get();
         MedicineCart medicineCart = cartRepository.getCartByPatient(loggedInPatient);
-        Shipments shipments = shipmentRepository.getShipmentByCartAndStatus(medicineCart, "ACTIVE");
+        Shipments shipments = shipmentRepository.getShipmentByMedicineCartAndStatus(medicineCart, "ACTIVE");
         if (shipments == null) {
             shipments = new Shipments();
             shipments.getMedicineCart().setPatient(loggedInPatient);
@@ -118,23 +118,23 @@ public class ShipmentsController {
     public ResponseEntity getMedicineCart(Principal principal) {
         Patient loggedInPatient = patientRepository.findPatientByUsername(principal.getName());
         MedicineCart medicineCart = cartRepository.getCartByPatient(loggedInPatient);
-        Shipments shipments = shipmentRepository.getShipmentByCartAndStatus(medicineCart, "ACTIVE");
+        Shipments shipments = shipmentRepository.getShipmentByMedicineCartAndStatus(medicineCart, "ACTIVE");
         return ResponseEntity.ok(shipments);
     }
     
-    @GetMapping("/prescription-cart")
-    public ResponseEntity getPrescriptionCart(Principal principal) {
-        Patient loggedInPatient = patientRepository.findPatientByUsername(principal.getName());
-        Prescription prescription = prescriptionRepository.getPrescriptionByPatient(loggedInPatient);
-        Shipments shipments = shipmentRepository.getShipmentByPrescriptionAndStatus(prescription, "ACTIVE");
-        return ResponseEntity.ok(shipments);
-    }
+//    @GetMapping("/prescription-cart")
+//    public ResponseEntity getPrescriptionCart(Principal principal) {
+//        Patient loggedInPatient = patientRepository.findPatientByUsername(principal.getName());
+//        Prescription prescription = prescriptionRepository.getPrescriptionByPatient(loggedInPatient);
+//        Shipments shipments = shipmentRepository.getShipmentByPrescriptionAndStatus(prescription, "ACTIVE");
+//        return ResponseEntity.ok(shipments);
+//    }
 
     @PostMapping("/checkout-cart")
     public ResponseEntity checkoutCart(Principal principal) throws JsonProcessingException {
         Patient loggedInPatient = patientRepository.findPatientByUsername(principal.getName());
         MedicineCart medicineCart = cartRepository.getCartByPatient(loggedInPatient);
-        Shipments shipments = shipmentRepository.getShipmentByCartAndStatus(medicineCart, "ACTIVE");
+        Shipments shipments = shipmentRepository.getShipmentByMedicineCartAndStatus(medicineCart, "ACTIVE");
         if (shipments == null) {
             return ResponseEntity.badRequest().body("Shipment not Found");
         }
@@ -142,15 +142,15 @@ public class ShipmentsController {
         return ResponseEntity.ok("OK");
     }
     
-    @PostMapping("/checkout-prescription")
-    public ResponseEntity checkoutPrescription(Principal principal) throws JsonProcessingException {
-        Patient loggedInPatient = patientRepository.findPatientByUsername(principal.getName());
-        Prescription prescription = prescriptionRepository.getPrescriptionByPatient(loggedInPatient);
-        Shipments shipments = shipmentRepository.getShipmentByPrescriptionAndStatus(prescription, "ACTIVE");
-        if (shipments == null) {
-            return ResponseEntity.badRequest().body("Shipment not Found");
-        }
-        service.orderPrescription(shipments, prescription);
-        return ResponseEntity.ok("OK");
-    }
+//    @PostMapping("/checkout-prescription")
+//    public ResponseEntity checkoutPrescription(Principal principal) throws JsonProcessingException {
+//        Patient loggedInPatient = patientRepository.findPatientByUsername(principal.getName());
+//        Prescription prescription = prescriptionRepository.getPrescriptionByPatient(loggedInPatient);
+//        Shipments shipments = shipmentRepository.getShipmentByPrescriptionAndStatus(prescription, "ACTIVE");
+//        if (shipments == null) {
+//            return ResponseEntity.badRequest().body("Shipment not Found");
+//        }
+//        service.orderPrescription(shipments, prescription);
+//        return ResponseEntity.ok("OK");
+//    }
 }

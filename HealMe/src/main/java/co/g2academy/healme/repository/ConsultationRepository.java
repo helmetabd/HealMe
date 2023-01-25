@@ -8,11 +8,13 @@ import co.g2academy.healme.model.Consultation;
 import co.g2academy.healme.model.Patient;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author personal
  */
+@Repository
 public interface ConsultationRepository extends JpaRepository<Consultation, Integer>{
     public List<Consultation> findConsultationByPatient(Patient patient);
 }

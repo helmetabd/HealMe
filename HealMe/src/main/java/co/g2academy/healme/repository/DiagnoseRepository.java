@@ -9,11 +9,13 @@ import co.g2academy.healme.model.Doctor;
 import co.g2academy.healme.model.Patient;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author personal
  */
+@Repository
 public interface DiagnoseRepository extends JpaRepository<Diagnose, Integer>{
     public Diagnose findDiagnoseByDoctor(Doctor doctor);
     public List<Diagnose> findDiagnoseByPatient(Patient patient);

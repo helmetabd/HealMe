@@ -47,7 +47,7 @@ public class MedicineCart {
     @JsonIgnore
     private Doctor doctor;
     
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "medicine_cart")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "medicineCart")
     private List<MedicineCartDetail> items;
     
     @Column(nullable = true)

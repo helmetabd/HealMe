@@ -29,7 +29,7 @@ public class Shipments {
     private Integer id;
     
     @ManyToOne
-    @JoinColumn(name = "Medicine_cart_id", nullable = false)
+    @JoinColumn(name = "medicine_cart_id", nullable = false)
     @JsonIgnore
     private MedicineCart medicineCart;
     

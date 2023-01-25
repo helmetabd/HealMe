@@ -16,6 +16,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -31,8 +32,8 @@ public class Prescription {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     
+    @OneToOne
     @JoinColumn(name = "diagnose_id", nullable = false)
-    @JsonIgnore
     private Diagnose Diagnose;
     
     @ManyToOne

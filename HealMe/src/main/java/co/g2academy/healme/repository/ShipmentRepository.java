@@ -5,15 +5,15 @@
 package co.g2academy.healme.repository;
 
 import co.g2academy.healme.model.MedicineCart;
-import co.g2academy.healme.model.Prescription;
 import co.g2academy.healme.model.Shipments;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author personal
  */
+@Repository
 public interface ShipmentRepository extends JpaRepository<Shipments, Integer>{
-    public Shipments getShipmentByCartAndStatus(MedicineCart medicineCart, String status);
-    public Shipments getShipmentByPrescriptionAndStatus(Prescription prescription, String status);
+    public Shipments getShipmentByMedicineCartAndStatus(MedicineCart medicineCart, String status);
 }

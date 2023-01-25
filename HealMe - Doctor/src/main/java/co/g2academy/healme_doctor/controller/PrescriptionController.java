@@ -104,30 +104,4 @@ public class PrescriptionController {
         prescriptionRepository.save(prescription);
         return ResponseEntity.ok("OK");
     }
-    
-    @GetMapping("/prescription")
-    public ResponseEntity getPrescription(Principal principal){
-        Doctor loggedInDoctor = doctorRepository.findDoctorByUsername(principal.getName());
-        List<Diagnose> diagnose = diagnoseRepository.findDiagnoseByDoctor(loggedInDoctor);
-        if(diagnose == null){
-            return ResponseEntity.badRequest().body("You dont have any diagnose yet");
-        }
-        List<Prescription> prescriptions = prescriptionRepository.findPrescriptionByDoctor(loggedInDoctor);
-        return ResponseEntity.ok(prescriptions);
-    }
-    
-    @GetMapping("/prescription/{id}")
-    public ResponseEntity getPrescriptionById(@PathVariable Integer id, Principal principal){
-        Doctor loggedInDoctor = doctorRepository.findDoctorByUsername(principal.getName());
-        List<Diagnose> diagnose = diagnoseRepository.findDiagnoseByDoctor(loggedInDoctor);
-        if(diagnose == null){
-            return ResponseEntity.badRequest().body("You dont have any consultation yet");
-        }
-        Optional<Prescription> prescriptionOpt = prescriptionRepository.findById(id);
-        if (prescriptionOpt.isEmpty()) {
-            return ResponseEntity.badRequest().body("Prescription Not Found");
-        }
-        Prescription prescription = prescriptionOpt.get();
-        return ResponseEntity.ok(prescription);
-    }
 }

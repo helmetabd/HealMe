@@ -8,11 +8,13 @@ import co.g2academy.healme.model.MedicineCart;
 import co.g2academy.healme.model.Patient;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author personal
  */
+@Repository
 public interface MedicineCartRepository extends JpaRepository<MedicineCart, Integer>{
     public List<MedicineCart> findCartByPatient(Patient patient);
     public MedicineCart getCartByPatient(Patient patient);

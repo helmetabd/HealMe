@@ -37,11 +37,10 @@ public class ConsultationController {
     @GetMapping("/consult/{id}")
     public ResponseEntity consult(Principal principal, @PathVariable Integer id){
         Doctor loggedInDoctor = doctorRepository.findDoctorByUsername(principal.getName());
-        Optional<Consultation> consultationOpt = consultationRepository.findById(id);
-        if (consultationOpt.isEmpty()) {
+        Consultation consultation = consultationRepository.findConsultationByIdAndDoctor(id, loggedInDoctor);
+        if (consultation == null) {
             return ResponseEntity.badRequest().body("Consultation Not Found");
         }
-        Consultation consultation = consultationOpt.get();
         return ResponseEntity.ok(consultation);
     }
     

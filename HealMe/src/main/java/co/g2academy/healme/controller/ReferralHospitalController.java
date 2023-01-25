@@ -36,8 +36,8 @@ public class ReferralHospitalController {
     
     @GetMapping("/referral")
     public ResponseEntity getReferralHospital(Principal principal) {
-        Patient patientFromDb = patientRepository.findPatientByUsername(principal.getName());
-        ReferralHospital referral = referralRepository.getReferralByPatient(patientFromDb);
+        Patient loggedInPatient = patientRepository.findPatientByUsername(principal.getName());
+        ReferralHospital referral = referralRepository.getReferralByPatient(loggedInPatient);
         if(referral == null){
             ResponseEntity.badRequest().body("You dont have any referral hospital");
         }

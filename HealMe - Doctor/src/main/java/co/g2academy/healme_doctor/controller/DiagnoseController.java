@@ -41,42 +41,19 @@ public class DiagnoseController {
     @Autowired
     private ConsultationRepository consultationRepository;
     
-    @PostMapping("/diagnose/{id}")
-    public ResponseEntity sendDiagnose(@RequestBody Diagnose diagnose, Principal principal, @PathVariable Integer id) {
+    @PostMapping("/diagnose")
+    public ResponseEntity sendDiagnose(@RequestBody Diagnose diagnose, Principal principal) {
         Doctor loggedInDoctor = doctorRepository.findDoctorByUsername(principal.getName());
-        Optional<Consultation> consultaionOpt = consultationRepository.findById(id);
+        Optional<Consultation> consultaionOpt = consultationRepository.findById(diagnose.getConsultation().getId());
         if (consultaionOpt.isEmpty()) {
             return ResponseEntity.badRequest().body("Patient Not Found");
         }
         Consultation consultation = consultaionOpt.get();
-        diagnose = diagnoseRepository.findDiagnoseByConsultation(consultation);
         diagnose.setConsultation(consultation);
         diagnose.setPatient(consultation.getPatient());
         diagnose.setDoctor(loggedInDoctor);
         diagnose.setDescription(diagnose.getDescription());
         diagnoseRepository.save(diagnose);
         return ResponseEntity.ok("Success sending diagnose to " + consultation.getPatient().getName());
-    }
-    @GetMapping("/diagnose/{name}")
-    public ResponseEntity getDiagnoseByPatient(@PathVariable String name, Principal principal) {
-        Doctor loggedInDoctor = doctorRepository.findDoctorByUsername(principal.getName());
-        Patient patient = patientRepository.findPatientByUsername(principal.getName());
-        List<Consultation> consultation = consultationRepository.findConsultationByDoctor(loggedInDoctor);
-        if(consultation == null){
-            return ResponseEntity.badRequest().body("You dont have any consultation yet");
-        }
-        Diagnose diagnose = diagnoseRepository.findDiagnoseByPatient(patient);
-        return ResponseEntity.ok(diagnose);
-    }
-    
-    @GetMapping("/diagnose")
-    public ResponseEntity getDiagnose(Principal principal) {
-        Doctor loggedInDoctor = doctorRepository.findDoctorByUsername(principal.getName());
-        List<Consultation> consultation = consultationRepository.findConsultationByDoctor(loggedInDoctor);
-        if(consultation == null){
-            return ResponseEntity.badRequest().body("You dont have any consultation yet");
-        }
-        List<Diagnose> diagnose = diagnoseRepository.findDiagnoseByDoctor(loggedInDoctor);
-        return ResponseEntity.ok(diagnose);
     }
 }

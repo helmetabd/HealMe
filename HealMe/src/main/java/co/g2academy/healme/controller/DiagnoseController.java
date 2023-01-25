@@ -41,10 +41,6 @@ public class DiagnoseController {
     @GetMapping("/diagnose")
     public ResponseEntity getDiagnoses(Principal principal) {
         Patient loggedInPatient = patientRepository.findPatientByUsername(principal.getName());
-        List<Consultation> consultation = consultationRepository.findConsultationByPatient(loggedInPatient);
-        if(consultation == null){
-            return ResponseEntity.badRequest().body("You dont have any consultation yet");
-        }
         List<Diagnose> diagnose = diagnoseRepository.findDiagnoseByPatient(loggedInPatient);
         return ResponseEntity.ok(diagnose);
     }
@@ -52,10 +48,6 @@ public class DiagnoseController {
     public ResponseEntity getDiagnoseByDoctor(@PathVariable String name, Principal principal) {
         Patient loggedInPatient = patientRepository.findPatientByUsername(principal.getName());
         Doctor doctor = doctorRepository.findDoctorByUsername(principal.getName());
-        List<Consultation> consultation = consultationRepository.findConsultationByPatient(loggedInPatient);
-        if(consultation == null){
-            return ResponseEntity.badRequest().body("You dont have any consultation yet");
-        }
         Diagnose diagnose = diagnoseRepository.findDiagnoseByDoctor(doctor);
         return ResponseEntity.ok(diagnose);
     }

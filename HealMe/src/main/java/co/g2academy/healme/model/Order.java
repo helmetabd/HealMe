@@ -26,14 +26,14 @@ import javax.persistence.TemporalType;
  * @author personal
  */
 @Entity
-@Table(name = "t_prescription_order")
+@Table(name = "t_order")
 public class Order implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     
+    @ManyToOne
     @JoinColumn(name = "diagnose_id", nullable = false)
-    @JsonIgnore
     private Diagnose Diagnose;
     
     @ManyToOne

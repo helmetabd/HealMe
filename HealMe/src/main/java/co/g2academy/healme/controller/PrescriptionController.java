@@ -4,7 +4,6 @@
  */
 package co.g2academy.healme.controller;
 
-import co.g2academy.healme.model.Diagnose;
 import co.g2academy.healme.model.Patient;
 import co.g2academy.healme.model.Prescription;
 import co.g2academy.healme.repository.DiagnoseRepository;
@@ -38,25 +37,16 @@ public class PrescriptionController {
     @GetMapping("/prescription")
     public ResponseEntity getPrescription(Principal principal){
         Patient loggedInPatient = patientRepository.findPatientByUsername(principal.getName());
-        List<Diagnose> diagnose = diagnoseRepository.findDiagnoseByPatient(loggedInPatient);
-        if(diagnose == null){
-            return ResponseEntity.badRequest().body("You dont have any diagnose yet");
-        }
         List<Prescription> prescriptions = prescriptionRepository.findPrescriptionByPatient(loggedInPatient);
         return ResponseEntity.ok(prescriptions);
     }
     @GetMapping("/prescription/{id}")
     public ResponseEntity getPrescriptionById(@PathVariable Integer id, Principal principal){
         Patient loggedInPatient = patientRepository.findPatientByUsername(principal.getName());
-        List<Diagnose> diagnose = diagnoseRepository.findDiagnoseByPatient(loggedInPatient);
-        if(diagnose == null){
-            return ResponseEntity.badRequest().body("You dont have any diagnose yet");
-        }
         Optional<Prescription> prescriptionOpt = prescriptionRepository.findById(id);
-        if (prescriptionOpt.isEmpty()) {
-            return ResponseEntity.badRequest().body("Prescription Not Found");
+        if(prescriptionOpt.isPresent() && prescriptionOpt.get().getPatient().getId() == loggedInPatient.getId()){
+            return ResponseEntity.ok(prescriptionOpt.get());
         }
-        Prescription prescription = prescriptionOpt.get();
-        return ResponseEntity.ok(prescription);
+        return ResponseEntity.badRequest().body("Prescription not Found");
     }
 }

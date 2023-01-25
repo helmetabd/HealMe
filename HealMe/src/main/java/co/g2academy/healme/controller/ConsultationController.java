@@ -50,19 +50,15 @@ public class ConsultationController {
         return doctorRepository.findBySpecialist(specialist);
     }
     
-    @PostMapping("/consult/{id}")
-    public ResponseEntity consult(@RequestBody Consultation consultation, Principal principal, @PathVariable Integer id){
+    @PostMapping("/consult")
+    public ResponseEntity consult(@RequestBody Consultation consultation, Principal principal){
         Patient loggedInPatient = patientRepository.findPatientByUsername(principal.getName());
-        Optional<Doctor> doctorOpt = doctorRepository.findById(id);
-        if (doctorOpt.isEmpty()) {
-            return ResponseEntity.badRequest().body("Doctor Not Found");
-        }
-        Doctor doctor = doctorOpt.get();
         consultation.setPatient(loggedInPatient);
+        Doctor doctor = doctorRepository.findById(consultation.getDoctor().getId()).get();
         consultation.setDoctor(doctor);
         consultation.setConsultationDate(new Date());
         consultation.setSubject(consultation.getSubject());
-        consultation.setStatus(consultation.getStatus());
+        consultation.setStatus("Waiting");
         consultation.setDescription(consultation.getDescription());
         consultationRepository.save(consultation);
         return ResponseEntity.ok("Sending Consultation to " + doctor.getName() + " Success");

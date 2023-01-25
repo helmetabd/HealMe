@@ -55,7 +55,7 @@ public class ReferralHospitalController {
     }
     
     @PostMapping("/referral")
-    public ResponseEntity sendReferralHospital(@RequestBody AddToReferral atr, Principal principal, @PathVariable Integer id){
+    public ResponseEntity sendReferralHospital(@RequestBody AddToReferral atr, Principal principal){
         Doctor loggedInDoctor = doctorRepository.findDoctorByUsername(principal.getName());
         Optional<Hospital> opt = hospitalRepository.findById(atr.getHospitalId());
         if (opt.isEmpty()) {
@@ -75,15 +75,5 @@ public class ReferralHospitalController {
         referralHospital.setReferralDate(new Date());
         referralRepository.save(referralHospital);
         return ResponseEntity.ok("Success");
-    }
-    
-    @GetMapping("/referral")
-    public ResponseEntity getReferralHospital(Principal principal) {
-        Doctor doctorFromDb = doctorRepository.findDoctorByUsername(principal.getName());
-        ReferralHospital referral = referralRepository.getReferralByDoctor(doctorFromDb);
-        if(referral == null){
-            ResponseEntity.badRequest().body("You dont have any referral hospital");
-        }
-        return ResponseEntity.ok(referral.getHospital());
     }
 }

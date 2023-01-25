@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,6 +29,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/api")
+@CrossOrigin(origins = "http://localhost:3000")
 public class MedicineController {
 
     @Autowired
@@ -41,20 +43,26 @@ public class MedicineController {
     }
 
     @GetMapping("/medicine/{id}")
-    public Medicine getMedicineById(@PathVariable Integer id) {
+    public ResponseEntity getMedicineById(@PathVariable Integer id) {
         Optional<Medicine> opt =  medicineRepsitory.findById(id);
-        if(opt.isPresent()){
-            return opt.get();
+        if(opt.isEmpty()){
+            return ResponseEntity.badRequest().body("Medicine Not Found");
         }
-        return null;
+        return ResponseEntity.ok(opt.get());
     }
 
     @PostMapping("/save/medicine")
-    public String save(@RequestBody Medicine medicine, Principal principal) {
+    public ResponseEntity save(@RequestBody Medicine medicine, Principal principal) {
         User loggedInUser = userRepository.findUserByUsername(principal.getName());
         medicine.setUser(loggedInUser);
-        medicineRepsitory.save(medicine);
-        return "success";
+        Medicine medicineFromDb = medicineRepsitory.findMedicineByName(medicine.getName());
+        Medicine newMedicine = null;
+        if (medicineFromDb == null) {
+            newMedicine = medicineRepsitory.save(medicine);
+        } else {
+            return ResponseEntity.badRequest().body("Book already exist");
+        }
+        return ResponseEntity.ok().body(newMedicine);
     }
 
     @PutMapping("/update/medicine/{id}")
@@ -66,9 +74,10 @@ public class MedicineController {
                 mFromDb.setDescription(medicine.getDescription());
                 mFromDb.setName(medicine.getName());
                 mFromDb.setPrice(medicine.getPrice());
-                mFromDb.setStock(medicine.getStock());
-                medicineRepsitory.save(mFromDb);
-                return ResponseEntity.ok("success");
+                mFromDb.setStocks(medicine.getStocks());
+                mFromDb.setImage(medicine.getImage());
+                Medicine updatedMedicine = medicineRepsitory.save(mFromDb);
+                return ResponseEntity.ok(updatedMedicine);
             }
         }
         return ResponseEntity.badRequest().body("Medicine not found");
@@ -84,7 +93,7 @@ public class MedicineController {
                 return ResponseEntity.ok("success");
             }
         }
-        return ResponseEntity.badRequest().body("Product not found");
+        return ResponseEntity.badRequest().body("Medicine not found");
     }
 //    @DeleteMapping("/product")
 //    public String delete() {

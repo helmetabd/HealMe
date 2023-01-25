@@ -12,5 +12,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @author personal
  */
 public interface HospitalRepository extends JpaRepository<Hospital, Integer>{
-    
+    public Hospital findHospitalByName(String Name);
 }
