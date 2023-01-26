@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
-import logo from "../img/logo5.PNG"
+import logo from "../img/Picture2.png"
 
 function Login() {
   const navigate = useNavigate();
@@ -51,7 +51,7 @@ function Login() {
                     <form className="card-body cardbody-color p-lg-5">
                         <div className="text-center">
                             <img src={logo}
-                                className="img-fluid profile-image-pic img-thumbnail rounded-circle my-3"
+                                className="img-fluid profile-image-pic img-thumbnail my-3"
                                 width="200px" alt="profile"/>
                         </div>
 
