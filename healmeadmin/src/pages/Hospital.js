@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import ReadMoreReact from 'read-more-react';
 
 function Hospital() {
@@ -8,7 +9,11 @@ function Hospital() {
 
     const navigate = useNavigate();
 
-    const [ hospital, setHospital ] = useState({});
+    const dispatch = useDispatch();
+
+    const hospital =  useSelector(state => state.hospital);
+
+    // const [ hospital, setHospital ] = useState({});
 
     const fetchHospital = () => {
         fetch(`http://localhost:8083/api/hospital/${id}`, {
@@ -26,35 +31,16 @@ function Hospital() {
         })
         .then(data => {
             // console.log(data)
-            setHospital(data)
+            // setHospital(data)
+            dispatch({ type: "SET_HOSPITAL", payload: data})
         })
         .catch(err => {
             console.log(err.message)
         })
     }
 
-    const buy = () => {
-        fetch(`http://localhost:8080/api/hospital/buy/${id}`, {
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization : `${localStorage.getItem("Authorization")}`
-          },
-          body: JSON.stringify({totalBuy: 1}),
-          method: 'PUT'
-        })
-        .then(response => {
-            return response.json();
-        })
-        .then(data => {
-            setHospital({...hospital, stocks: hospital.stocks - 1});
-        })
-        .catch(err => {
-            console.log(err);
-        })
-    }
-
     const remove = () => {
-        fetch(`http://localhost:8083/api/hospital/delete/${id}`, {
+        fetch(`http://localhost:8083/api/hospital/${id}`, {
         headers: {
             'Content-Type': 'application/json',
             Authorization : `${localStorage.getItem("Authorization")}`
@@ -76,10 +62,6 @@ function Hospital() {
         fetchHospital();
     }, []);
 
-    useEffect(() => {
-        fetchHospital();
-    }, [ hospital.stocks ]);
-
     return (
         <div className="card mb-3 mx-auto p-3 mt-4 insert" style={{maxWidth: "800px"}} key={hospital.id}>
             <div className="row g-0">
@@ -90,14 +72,15 @@ function Hospital() {
                 </div>
                 <div className="col-md-8">
                     <div className="card-body d-flex">
-                        <div >
+                        <div>
+                            <h4>Description: </h4>
                             <p className="card-text">{hospital.description}</p>
+                            <h4>Address: </h4>
                             <p className="card-text">{hospital.address}</p>
                         </div>
                         <div>
-                            <button onClick={() => buy(hospital.id)} disabled={(hospital.stocks === 0) ? true : false}>Buy</button>
+                            <button onClick={() => {navigate("/hospital/edit")}}>Edit</button>
                             <button onClick={remove}>Remove</button>
-                            <button>Add To Cart</button>
                         </div>
                     </div>
                 </div>

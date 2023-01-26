@@ -12,6 +12,7 @@ import Login from './pages/Login';
 import Hospitals from './pages/Hospitals';
 import Hospital from './pages/Hospital';
 import FormHospital from './pages/Form Hospital';
+import EditHospital from './pages/Edit Hospital';
 import Register from './pages/Register';
 
 function App() {
@@ -46,6 +47,7 @@ function App() {
         <Route path="/medicine/edit" element = { <EditMedicine/> } />
         <Route path="/hospital/:id" element = { <Hospital/> } />
         <Route path="/hospital/add" element = { <FormHospital/> } />
+        <Route path="/hospital/edit" element = { <EditHospital/> } />
       </Routes>
     </div>
   );

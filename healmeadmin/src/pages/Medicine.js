@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom';
-import ReadMoreReact from 'read-more-react';
 import { useDispatch, useSelector } from 'react-redux';
 
 function Medicine() {
@@ -12,8 +11,6 @@ function Medicine() {
     const dispatch = useDispatch();
 
     const medicine =  useSelector(state => state.medicine);
-
-    // const [ medicine, setMedicine ] = useState({});
 
     const fetchMedicine = () => {
         fetch(`http://localhost:8083/api/medicine/${id}`, {
@@ -39,30 +36,10 @@ function Medicine() {
         })
     }
 
-    // const buy = () => {
-    //     fetch(`http://localhost:8083/api/update/medicine/${id}`, {
-    //       headers: {
-    //         'Content-Type': 'application/json',
-    //         Authorization : `${localStorage.getItem("Authorization")}`
-    //       },
-    //       body: JSON.stringify({totalBuy: 1}),
-    //       method: 'PUT'
-    //     })
-    //     .then(response => {
-    //         return response.json();
-    //     })
-    //     .then(data => {
-    //         setMedicine({...medicine, stocks: medicine.stocks - 1});
-    //     })
-    //     .catch(err => {
-    //         console.log(err);
-    //     })
-    // }
-
     const remove = () => {
-        fetch(`http://localhost:8083/api/medicine/delete/${id}`, {
+        fetch(`http://localhost:8083/api/medicine/${id}`, {
         headers: {
-            // 'Content-Type': 'application/json',
+            'Content-Type': 'application/json',
             Authorization : `${localStorage.getItem("Authorization")}`
         },  
         method: 'DELETE'

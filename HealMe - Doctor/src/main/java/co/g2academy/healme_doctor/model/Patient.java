@@ -13,6 +13,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -37,8 +38,11 @@ public class Patient {
     @Column(nullable = true)
     @Temporal(TemporalType.TIMESTAMP)
     private Date birthDate;
-    @Column(length = 255, nullable = false)
+    @Lob
+    @Column (nullable = false)
     private String address;
+    @Column(length = 100, nullable = false)
+    private String gender;
 
     public Integer getId() {
         return id;
@@ -102,5 +106,14 @@ public class Patient {
     public void setAddress(String address) {
         this.address = address;
     }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+    
     
 }

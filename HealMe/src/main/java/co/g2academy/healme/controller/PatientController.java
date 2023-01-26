@@ -42,11 +42,11 @@ public class PatientController {
         if (patientFromDb == null && emailValidator.emailPatternMatch(patient.getUsername())
                 && passwordValidator.passwordPatternMatch(patient.getPassword())) {
             patient.setPassword(paswordEncoder.encode(patient.getPassword()));
-            repository.save(patient);
         } else {
             return ResponseEntity.badRequest().body("email and password invalid");
         }
-        return ResponseEntity.ok().body("OK");
+        Patient newPatient = repository.save(patient);
+        return ResponseEntity.ok().body(newPatient);
     }
     
     @GetMapping("/patient")
@@ -62,8 +62,9 @@ public class PatientController {
             patientFromDb.setName(patient.getName());
             patientFromDb.setAddress(patient.getAddress());
             patientFromDb.setBirthDate(patient.getBirthDate());
-            repository.save(patientFromDb);
-            return ResponseEntity.ok("success");
+            patientFromDb.setGender(patient.getGender());
+            Patient updatedPatient = repository.save(patientFromDb);
+            return ResponseEntity.ok(updatedPatient);
         }
         return ResponseEntity.badRequest().body("Patient not found");
     }

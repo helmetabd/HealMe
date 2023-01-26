@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 
 /**
@@ -23,12 +24,16 @@ public class Medicine {
     private Integer id;
     @Column(length = 100, nullable = false)
     private String name;
-    @Column(length = 255, nullable = false)
+    @Lob
+    @Column (nullable = false)
     private String description;
+    @Lob
+    @Column(nullable = false)
+    private String image;
     @Column(nullable = false)
     private Integer price;
     @Column(nullable = false)
-    private Integer stock;
+    private Integer stocks;
 
     public Integer getId() {
         return id;
@@ -54,6 +59,14 @@ public class Medicine {
         this.description = description;
     }
 
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
     public Integer getPrice() {
         return price;
     }
@@ -62,13 +75,11 @@ public class Medicine {
         this.price = price;
     }
 
-    public Integer getStock() {
-        return stock;
+    public Integer getStocks() {
+        return stocks;
     }
 
-    public void setStock(Integer stock) {
-        this.stock = stock;
+    public void setStocks(Integer stocks) {
+        this.stocks = stocks;
     }
-    
-    
 }

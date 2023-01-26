@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -42,13 +43,14 @@ public class Consultation {
     @Temporal(TemporalType.TIMESTAMP)
     private Date consultationDate;
     
-    @Column(length = 10, nullable = false)
+    @Column(length = 50, nullable = false)
     private String subject;
     
-    @Column(length = 10, nullable = false)
+    @Column(length = 20, nullable = false)
     private String status;
     
-    @Column(length = 255, nullable = false)
+    @Lob
+    @Column (nullable = false)
     private String description;
 
     public Integer getId() {
