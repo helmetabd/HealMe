@@ -55,8 +55,8 @@ function FormMedicine() {
 
     return(
         <div className="d-flex flex-row justify-content-center">
-            <div id="form" className="d-flex flex-column align-items-center sticky-top">
-                <form className="d-flex flex-column align-items-center sticky-top flex-wrap" onSubmit={apa}>
+            <div id="form" className="d-flex flex-column align-items-center">
+                <form className="d-flex flex-column align-items-center flex-wrap" onSubmit={apa}>
                     <h2>Edit Data Medicine</h2>
                     <InputBox type="text" title="Name" id="name" value={inputMedicine.name} onChange={onChangeMedicines}/>
                     <InputBox title="Description" id="description" value={inputMedicine.description} onChange={onChangeMedicines}/>

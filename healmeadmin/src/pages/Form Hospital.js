@@ -47,8 +47,8 @@ function FormHospital() {
 
     return(
         <div className="d-flex flex-row justify-content-center">
-            <div id="form" className="d-flex flex-column align-items-center sticky-top">
-                <form className="d-flex flex-column align-items-center sticky-top flex-wrap" onSubmit={apa}>
+            <div id="form" className="d-flex flex-column align-items-center">
+                <form className="d-flex flex-column align-items-center flex-wrap" onSubmit={apa}>
                     <h2>Input New Hospital</h2>
                     <InputBox type="text" title="Name" id="name" value={inputHospital.name} onChange={onChangeHospitals}/>
                     <InputBox title="Description" id="description" value={inputHospital.description} onChange={onChangeHospitals}/>

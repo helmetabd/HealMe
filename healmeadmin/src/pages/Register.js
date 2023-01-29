@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import logo from "../img/logo5.PNG"
+import logo from "../img/Picture1.png"
 
 function Register() {
   const navigate = useNavigate();
@@ -38,19 +38,17 @@ function Register() {
 
   return (
     <div className="container">
-            <div className="row">
-                <div className="col-md-6 offset-md-3 insert">
-                    <h2 className="text-center text-dark mt-5">Register Page</h2>
-                    <div className="card my-5">
-
-                        <form className="card-body cardbody-color p-lg-5">
-
-                            <div className="text-center">
+            <div className="row justify-content-center">
+            <div className="col-md-6 insertCard">
+                    <h2 className="text-center text-dark mt-4">Register Page</h2>
+                    <div className="card border-light my-2">
+                        <form className="card-body cardbody-color p-lg-2">
+                            <div className="d-flex flex-row align-items-center justify-content-center me-5">
                                 <img src={logo}
-                                     className="img-fluid profile-image-pic img-thumbnail rounded-circle my-3"
-                                     width="200px" alt="profile"/>
+                                    className="img-fluid profile-image-pic img-thumbnail my-3 border-light"
+                                    width="115px" alt="profile"/>
+                                <p className='text-center' style={{color: '#5f96d7', fontSize: 24, marginBottom: 0}}>Heal<span style={{color: '#a0a7b5'}}>Me</span><br/>Admin</p>
                             </div>
-
                             <div className="mb-3">
                                 <input type="text" className="form-control" id="username" aria-describedby="emailHelp" placeholder='username'
                                        onChange={handleOnChange} value={userRegister.username}/>
@@ -65,11 +63,11 @@ function Register() {
                             </div>
                             <div className="text-center">
                                 <button type="submit" onClick={signUp}
-                                        className="btn btn-warning btn-color px-5 mb-5 w-100">Register
+                                        className="btn btn-warning btn-color px-5 mb-3 w-auto">Register
                                 </button>
                             </div>
                         </form>
-                        <div id="emailHelp" className="form-text text-center mb-5 text-dark">Have an account? <Link className="nav-link active link-dark" aria-current="page" to="/login">Login</Link></div>
+                        <div id="emailHelp" className="form-text text-center mb-2 text-dark">Have an account? <Link className="nav-link active link-dark" aria-current="page" to="/login">Login</Link></div>
                     </div>
                 </div>
             </div>

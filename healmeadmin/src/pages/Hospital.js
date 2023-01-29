@@ -67,7 +67,7 @@ function Hospital() {
             <div className="row g-0">
                 <div className="col-md-4">
                     <h5 className="card-title">{hospital.name}</h5>
-                    <img src={hospital.image} className="img-fluid rounded-start"/>
+                    <img src={hospital.image} className="img-fluid rounded"/>
                     {/* <h4 className="mt-3">Author: {hospital.author}</h4> */}
                 </div>
                 <div className="col-md-8">

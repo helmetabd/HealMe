@@ -60,7 +60,7 @@ function Medicine() {
     }, []);
 
     return (
-        <div className="card mb-3 mx-auto p-3 mt-4 insert" style={{maxWidth: "800px"}} key={medicine.id}>
+        <div className="card mb-3 mx-auto p-3 mt-4 insertCard" style={{maxWidth: "800px"}} key={medicine.id}>
             <div className="row g-0">
                 <div className="col-md-4">
                     <h5 className="card-title">{medicine.name}</h5>

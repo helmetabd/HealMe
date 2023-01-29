@@ -28,10 +28,10 @@ function InputImage(props) {
     <div className="form-floating mb-3 InputBox m-1 p-1">
         <form>
             <input className="form-control" id={props.id} type={props.type} accept="image/*" placeholder="Upload Medicine Image" onChange={upload}/>
-            <label htmlFor={props.id}>{props.title}</label>
+            <label className='m-2' htmlFor={props.id}>{props.title}</label>
         </form>
         <div>
-            <img src={uploadImage} width="250" height="250" />
+            <img className='m-2' src={uploadImage} width="250" height="250" />
         </div>
     </div>
   )

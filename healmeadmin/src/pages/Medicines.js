@@ -34,7 +34,7 @@ function Medicines() {
       return (
         <div className="d-flex flex-row justify-content-center">
             <div className="d-flex flex-column align-items-center">
-                <h2 id="book-list"className="text-center">Medicine List</h2>
+                <h2 className="text-center insertCard">Medicine List</h2>
                 <div className="d-flex justify-content-evenly flex-wrap">
                     { medicines.map(medicine => (
                         <div id="card" className="card col-3 m-3 p-3">
