@@ -1,26 +1,13 @@
 import { StyleSheet, Text, View } from 'react-native';
-import Login from './screen/Login';
-import { useCallback } from 'react';
-import { useFonts } from 'expo-font';
+import store from './store';
+import AppNavigation from './navigations/AppNavigation';
+import { Provider } from 'react-redux';
 
 export default function App() {
-  let [fontsLoaded] = useFonts({
-    
-  });
-
-  const onLayoutRootView = useCallback(async () => {
-    if (fontsLoaded) {
-      await SplashScreen.hideAsync();
-    }
-  }, [fontsLoaded]);
-
-  if (!fontsLoaded) {
-    return null;
-  }
   return (
-    <View style={styles.container}>
-      <Login/>
-    </View>
+    <Provider store={store}>
+      <AppNavigation />
+    </Provider>
   );
 }
 
