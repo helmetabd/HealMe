@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import InputBox from '../components/InputBox';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import InputImage from '../components/InputImage';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -10,13 +10,49 @@ function FormMedicine() {
 
     const navigate = useNavigate();
 
-    const dispatch = useDispatch();
+    // const { id } = useParams();
 
+    // const { hospital } = useLocation();
     const hospital =  useSelector(state => state.hospital);
 
-    console.log(hospital);
+    const [ inputHospital, setInputHospital ] = useState({ 
+        id: "",
+        name: "", 
+        description: "", 
+        address: "", 
+        image: ""
+    });
+    
+    useEffect(() => {
+        
+        if (hospital) {
+            setInputHospital(state=> {
+                return{ ...state, id: hospital.id, name: hospital.name, description: hospital.description, address: hospital.address, image: hospital.image}
+            })
+        }
 
-    const [ inputHospital, setInputHospital ] = useState({ id: hospital.id, name: hospital.name, description: hospital.description, address: hospital.address, image: hospital.image});
+        // fetch(`http://localhost:8083/api/hospital/${id}`, {
+        //     headers: {
+        //         'Content-Type': 'application/json',
+        //         Authorization : `${localStorage.getItem("Authorization")}`
+        //     }
+        // })
+        // .then(response => {
+        //     if (response.ok) {
+        //         return response.json()
+        //     } else {
+        //         throw { message: 'Something went wrong', status: response.status }
+        //     }
+        // })
+        // .then(data => {
+        //     setInputHospital(state=> {
+        //         return{ ...state, name: data.name, description: data.description, address: data.address, image: data.image}
+        //     })
+        // })
+        // .catch(err => {
+        //     console.log(err.message)
+        // })
+    }, []);
 
     const edit = (input) => {
         

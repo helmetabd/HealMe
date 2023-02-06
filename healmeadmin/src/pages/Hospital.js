@@ -11,9 +11,9 @@ function Hospital() {
 
     const dispatch = useDispatch();
 
-    const hospital =  useSelector(state => state.hospital);
+    // const hospital =  useSelector(state => state.hospital);
 
-    // const [ hospital, setHospital ] = useState({});
+    const [ hospital, setHospital ] = useState({});
 
     const fetchHospital = () => {
         fetch(`http://localhost:8083/api/hospital/${id}`, {
@@ -31,7 +31,7 @@ function Hospital() {
         })
         .then(data => {
             // console.log(data)
-            // setHospital(data)
+            setHospital(data)
             dispatch({ type: "SET_HOSPITAL", payload: data})
         })
         .catch(err => {
@@ -68,7 +68,6 @@ function Hospital() {
                 <div className="col-md-4">
                     <h5 className="card-title">{hospital.name}</h5>
                     <img src={hospital.image} className="img-fluid rounded"/>
-                    {/* <h4 className="mt-3">Author: {hospital.author}</h4> */}
                 </div>
                 <div className="col-md-8">
                     <div className="card-body d-flex">
@@ -79,7 +78,7 @@ function Hospital() {
                             <p className="card-text">{hospital.address}</p>
                         </div>
                         <div>
-                            <button onClick={() => {navigate("/hospital/edit")}}>Edit</button>
+                            <button onClick={() => {navigate(`/hospital/edit`, { state: { hospital: hospital }})}}>Edit</button>
                             <button onClick={remove}>Remove</button>
                         </div>
                     </div>

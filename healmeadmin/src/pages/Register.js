@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import logo from "../img/Picture1.png"
 
@@ -9,17 +9,20 @@ function Register() {
   const handleOnChange = (e) => {
     setUserRegister(state => {
         return { ...state, [e.target.id]: e.target.value }
+        
     })
+    
   }
 
   const signUp = (e) => {
+    console.log(userRegister) 
     e.preventDefault();
     fetch(`http://localhost:8083/api/register`, { 
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            }, 
-            body: JSON.stringify(userRegister)
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        }, 
+        body: JSON.stringify(userRegister)
     })
     .then(response => {
         if (response.status === 200) {

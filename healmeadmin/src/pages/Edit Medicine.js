@@ -60,7 +60,7 @@ function FormMedicine() {
                     <h2>Edit Data Medicine</h2>
                     <InputBox type="text" title="Name" id="name" value={inputMedicine.name} onChange={onChangeMedicines}/>
                     <InputBox title="Description" id="description" value={inputMedicine.description} onChange={onChangeMedicines}/>
-                    <InputImage title="Medicine Image" id="image" type="file" value={inputMedicine.image} onChange={onChangeMedicines}/>
+                    <InputImage title="Medicine Image" folder="Obat" id="image" type="file" value={inputMedicine.image} onChange={onChangeMedicines}/>
                     {/* <InputBox title="Medicine Image" id="image" value={inputMedicine.image} onChange={onChangeMedicines}/> */}
                     <InputBox type="number" title="Price" id="price" value={Number(inputMedicine.price)} onChange={onChangeMedicines}/>
                     <InputBox type="number" title="Stocks" id="stocks" value={Number(inputMedicine.stocks)} onChange={onChangeMedicines}/>
